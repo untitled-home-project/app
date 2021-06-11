@@ -22,46 +22,67 @@ class Home extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.only(left: 18.0, right: 18.0),
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 28.0, left: 5.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text("Your tasks",
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: ArgonColors.text)),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: Card(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          const ListTile(
-                            title: Text('Replace air filter',
-                              style: TextStyle(fontSize: 18)),
-                            subtitle: Text('Air Conditioning | Every year'),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              TextButton(
-                                child: const Text('Details'),
-                                onPressed: () {/* ... */},
-                              ),
-                              const SizedBox(width: 8),
-                            ],
-                          ),
-                        ],
-                      )
-                    )
-                  ),
-                ],
-            ),
+              child: TaskList(),
           ),
-        )
-      )
+        ),
+      ),
     );
   }
+}
+
+class _TaskListState extends State<TaskList> {
+  var currentTasks = <TaskData>[];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 28.0, left: 5.0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text("Your tasks",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: ArgonColors.text)),
+          ),
+        ),
+        Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: Card(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const ListTile(
+                      title: Text('Replace air filter',
+                          style: TextStyle(fontSize: 18)),
+                      subtitle: Text('Air Conditioning | Every year'),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        TextButton(
+                          child: const Text('Details'),
+                          onPressed: () {/* TODO: Add view more info path here */},
+                        ),
+                        const SizedBox(width: 8),
+                      ],
+                    ),
+                  ],
+                )
+            )
+        ),
+      ],
+    );
+  }
+}
+
+class TaskList extends StatefulWidget {
+  @override
+  State<TaskList> createState() => _TaskListState();
+}
+
+class TaskData {
+  String task;
+  String frequency;
+  String category;
+  String detailsPath;
 }
